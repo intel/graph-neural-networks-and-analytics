@@ -45,15 +45,14 @@ Workflow has been tested on OS Rocky Linux v8.7 and Ubuntu 20.04
 ## Get Started
 
 ### 1. Download the Workflow Repository
-Create a working directory for the workflow and clone the [Main
-Repository](https://github.com/intel/graph-neural-networks-and-analytics>) repository into your working
+Create a working directory for the workflow and clone the [graph-neural-networks-and-analytics](https://github.com/intel/graph-neural-networks-and-analytics) repository into your working
 directory.
 
 ```
 mkdir ~/work && cd ~/work
 git clone https://github.com/intel/graph-neural-networks-and-analytics
 cd graph-neural-networks-and-analytics
-git checkout main
+git checkout tags/v1.0-beta
 export WORKSPACE=$PWD
 ```
 
