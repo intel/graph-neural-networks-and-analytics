@@ -1,3 +1,6 @@
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 import pandas as pd
 import numpy as np
 import csv

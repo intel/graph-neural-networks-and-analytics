@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 PROCESSED_DATA=$1
 OUT_DIR=$2
 CONFIG=$3

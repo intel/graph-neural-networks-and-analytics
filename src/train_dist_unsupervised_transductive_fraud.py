@@ -1,3 +1,6 @@
+# Modifications Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 import argparse
 import time
 from contextlib import contextmanager

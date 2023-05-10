@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 yes | conda create -n dgl1.0 python=3.8 -c anaconda
 
 eval "$(conda shell.bash hook)"

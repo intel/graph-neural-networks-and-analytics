@@ -1,3 +1,6 @@
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 import torch
 import pandas as pd
 import time

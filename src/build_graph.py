@@ -1,3 +1,6 @@
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 from queue import Empty
 import pandas as pd
 import numpy as np

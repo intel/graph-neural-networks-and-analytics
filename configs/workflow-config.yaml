@@ -1,3 +1,6 @@
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 env:
   num_node: 1
   node_ips: #pls make sure that the ip doesn't contain space in the end

@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 PROCESSED_DATA=$1
 GNN_TMP=$2
 PART_DIR=$3

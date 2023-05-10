@@ -1,5 +1,8 @@
-
 #!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 data_prePath=$1
 tmpPath=$2
 config=$3

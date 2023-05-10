@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 PROCESSED_DATA=$1
 NUMPART=$2
 PART_DIR=$3

@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Copyright (C) 2023 Intel Corporation
+# SPDX-License-Identifier: MIT
+
 #exit when any command fails
 #set -e
 
