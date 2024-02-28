@@ -8,6 +8,7 @@ import csv
 
 import time
 import yaml
+import pickle
 import os
 import argparse
 import dgl
@@ -70,6 +71,11 @@ def main(args):
     print("Writting data into set of CSV files (nodes/edges)")
     # The specs for yaml file content and node/edge CSV file please refer to:
     # https://docs.dgl.ai/en/1.0.x/guide/data-loadcsv.html#guide-data-pipeline-loadcsv
+
+    # saving the node_mapping "node2ID" dict
+    with open(os.path.join(CSVDataset_dir, "node2ID.pkl"), "wb") as f:
+        print("\nWriting: ", "node2ID.pkl")
+        pickle.dump(dict, f)
 
     # programatically create meta.yaml expected by DGL from yaml config
     list_of_n_dict = []

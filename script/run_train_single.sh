@@ -8,8 +8,11 @@ GNN_TMP=$2
 OUT_DIR=$3
 CSVDATASET=$4
 yamlPath=$5
+MODEL_DIR=$6
+CONFIG_DIR=$7
+ORG_DATA_FILE=$8
 
-if [ "$#" -ne 5 ]
+if [ "$#" -ne 8 ]
 then
   echo "Incorrect number of arguments to run_train_single.sh"
   exit 1
@@ -52,6 +55,7 @@ fi;
 
 #model, embb and final csv outputs
 mkdir -p ${OUT_DIR}
+mkdir -p ${MODEL_DIR}
 MODEL_OUT=${OUT_DIR}/model_graphsage_2L_64.pt
 NEMB_OUT=${OUT_DIR}/node_emb.pt #these are the default names
 NEMB_OUT_MAPPED=${OUT_DIR}/node_emb_mapped.pt #these are the default names
@@ -93,4 +97,4 @@ NUM_CORES_PER_SOCKET=`lscpu | grep "Core(s) per socket" |grep -Eo '[0-9]{1,3}'`
 NUM_THREADS=$((NUM_CORES_PER_SOCKET-workflow_spec_dataloader_params_num_workers))
 echo -e "\nSetting OMP_NUM_THREADS=$NUM_THREADS"
 
-OMP_NUM_THREADS=$NUM_THREADS numactl -N 0 python -u ${EXEC_SCRIPT} --num_epoch ${EPOCHS}  --num_hidden ${HIDDEN_FS} --num_layers ${N_LAYERS} --lr ${L_RATE} --fan_out ${FANOUT} --batch_size ${MB_SIZE} --batch_size_eval ${MB_SIZE_EVAL} --eval_every ${EVAL_EVERY} --CSVDataset_dir ${CSVDATASET} --model_out ${MODEL_OUT} --nemb_out ${NEMB_OUT} |& tee ${logdir}/${logname}.txt
+OMP_NUM_THREADS=$NUM_THREADS numactl -N 0 python -u ${EXEC_SCRIPT} --num_epoch ${EPOCHS}  --num_hidden ${HIDDEN_FS} --num_layers ${N_LAYERS} --lr ${L_RATE} --fan_out ${FANOUT} --batch_size ${MB_SIZE} --batch_size_eval ${MB_SIZE_EVAL} --eval_every ${EVAL_EVERY} --CSVDataset_dir ${CSVDATASET} --model_out ${MODEL_OUT} --nemb_out ${NEMB_OUT} --model_dir ${MODEL_DIR} --config_path ${CONFIG_DIR} --org_data_file ${ORG_DATA_FILE} |& tee ${logdir}/${logname}.txt

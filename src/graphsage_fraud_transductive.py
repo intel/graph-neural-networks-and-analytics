@@ -1,6 +1,7 @@
 # Copyright (C) 2023 Intel Corporation
 # SPDX-License-Identifier: MIT
 
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -21,6 +22,7 @@ from dgl import save_graphs, load_graphs
 from dgl import DGLGraph
 
 import tqdm
+import yaml
 import argparse
 import time
 from sklearn.metrics import roc_auc_score
@@ -257,6 +259,24 @@ def main(arglist):
         type=str,
         help="node emb output: /your_path/node_emb.pt",
     )
+    parser.add_argument(
+        "--model_dir",
+        default="/MODELS/",
+        type=str,
+        help="path for model output using in serving"
+    )
+    parser.add_argument(
+        "--config_path",
+        default="/CONFIGS",
+        type=str,
+        help="path for model config"
+    )
+    parser.add_argument(
+        "--org_data_file",
+        default="/DATA_IN/card_transaction.v1.csv",
+        type=str,
+        help="path for origin data"
+    )
     parser.add_argument("--num_epochs", type=int, default=3)
     parser.add_argument("--num_hidden", type=int, default=16)
     parser.add_argument("--num_layers", type=int, default=2)
@@ -383,6 +403,25 @@ def main(arglist):
     # rocauc_test = evaluate(model, test_dataloader)
     # print("final test rocauc", rocauc_test)
 
+    # save inference serving model
+    os.makedirs(os.path.join(args.model_dir, "credit_card_gnn/1"), exist_ok=True)
+    config_file = os.path.join(args.config_path, "serve/config.pbtxt")
+    os.system("cp {} {}".format(config_file, os.path.join(args.model_dir, "credit_card_gnn/")))
+    
+    with open(os.path.join(args.config_path, "serve/GNN-serve.yaml"), "r+") as f_config:
+        serving_config = yaml.safe_load(f_config)
+    serving_config["model"]["vocab_size"] = vocab_size
+    serving_config["model"]["hid_size"] = args.num_hidden
+    serving_config["model"]["n_layers"] = args.num_layers
+    with open(os.path.join(args.model_dir, "credit_card_gnn/1/GNN-serve.yaml"), "w+") as f_config:
+        yaml.dump(serving_config, f_config)
+    
+    os.system("cp {} {}".format(args.org_data_file, os.path.join(args.model_dir, "credit_card_gnn/1")))
+    os.system("cp {} {}".format(os.path.join(args.config_path, "serve/gnn_model.py"), os.path.join(args.model_dir, "credit_card_gnn/1")))
+    os.system("cp {} {}".format(os.path.join(args.config_path, "serve/model.py"), os.path.join(args.model_dir, "credit_card_gnn/1")))
+    os.system("cp {} {}".format(os.path.join(args.config_path, "tabular2graph.yaml"), os.path.join(args.model_dir, "credit_card_gnn/1")))
+    os.system("cp {} {}".format(args.model_out, os.path.join(args.model_dir, "credit_card_gnn/1")))
+    os.system("cp -r {} {}".format(os.path.join(os.path.dirname(args.model_out), "sym_tabformer_hetero_CSVDatasets"), os.path.join(args.model_dir, "credit_card_gnn/1")))
 
 import sys
 

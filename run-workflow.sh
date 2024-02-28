@@ -73,7 +73,7 @@ if [ "$env_bare_metal" = True ] ; then
             echo -e "\nStart GNN training..."
             config_path="${env_config_path}/${env_train_config_file}"
             echo ${config_path}
-            bash ./script/run_train_single.sh "${env_data_path}/${env_in_data_filename}" "${env_tmp_path}" "${env_out_path}" ${graph_CSVDataset_name} "${config_path}"
+            bash ./script/run_train_single.sh "${env_data_path}/${env_in_data_filename}" "${env_tmp_path}" "${env_out_path}" ${graph_CSVDataset_name} "${config_path}" "${env_model_dir}" "${env_config_path}" "${env_org_data_file}"
         fi;
 
         if [ "${single_map_save}" = True ]; then
@@ -159,6 +159,7 @@ else
           -v "${env_out_path}":/DATA_OUT \
           -v "${env_tmp_path}":/GNN_TMP \
           -v "${env_config_path}":/CONFIGS \
+          -v "${env_model_dir}":/MODELS \
           -it ${env_docker_image} ./host/script/run_gnn_wf_docker.sh /CONFIGS/${yamlFileName}
         #docker rm -f gnn
     ## multi node docker steps
