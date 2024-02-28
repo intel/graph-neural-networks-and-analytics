@@ -10,9 +10,11 @@ env:
   tmp_path: /localdisk/${USER}/cfg_valid
   #tmp_path used to save model, embeddings, partitions...
   data_path: /localdisk/${USER}/cfg_valid
+  org_data_file: /localdisk/${USER}/card_transaction.v1.csv
   in_data_filename: processed_data.csv
   #data_path should contain the in_data_filename (processed_data.csv)
   out_path: /localdisk/${USER}/cfg_valid
+  model_dir: /localdisk/${USER}/model
   #out_path will contain the output csv with the tabular data and new node embeddings
   config_path: /localdisk/${USER}/applications.ai.appliedml.workflow.GNNandAnalytics/configs
   #for single node docker exec paths need to be on /localdisk (or NFS with full permissions)
