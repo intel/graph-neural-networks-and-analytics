@@ -44,7 +44,7 @@ if [ "${single_gnn_training}" = True ]; then
     echo -e "\nStart GNN training..."
     config_path="/CONFIGS/${env_train_config_file}"
     echo $config_path
-    bash ./host/script/run_train_single.sh "/DATA_IN/${env_in_data_filename}" "/GNN_TMP" "/DATA_OUT" ${graph_CSVDataset_name} "${config_path}"
+    bash ./host/script/run_train_single.sh "/DATA_IN/${env_in_data_filename}" "/GNN_TMP" "/DATA_OUT" ${graph_CSVDataset_name} "${config_path}" "/MODELS" "/CONFIGS" "/DATA_IN/card_transaction.v1.csv"
 fi;
 if [ "${single_map_save}" = True ]; then
     echo "Mapping to original graph IDs followed by mapping to CSV file output"
