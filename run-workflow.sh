@@ -73,7 +73,7 @@ if [ "$env_bare_metal" = True ] ; then
             echo -e "\nStart GNN training..."
             config_path="${env_config_path}/${env_train_config_file}"
             echo ${config_path}
-            bash ./script/run_train_single.sh "${env_data_path}/${env_in_data_filename}" "${env_tmp_path}" "${env_out_path}" ${graph_CSVDataset_name} "${config_path}" "${env_model_dir}" "${env_config_path}" "${env_org_data_file}"
+            bash ./script/run_train_single.sh "${env_data_path}/${env_in_data_filename}" "${env_tmp_path}" "${env_out_path}" ${graph_CSVDataset_name} "${config_path}" "${env_model_dir}" "${env_org_data_file}"
         fi;
 
         if [ "${single_map_save}" = True ]; then
