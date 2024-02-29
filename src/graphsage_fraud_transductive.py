@@ -266,12 +266,6 @@ def main(arglist):
         help="path for model output using in serving"
     )
     parser.add_argument(
-        "--config_path",
-        default="/CONFIGS",
-        type=str,
-        help="path for model config"
-    )
-    parser.add_argument(
         "--org_data_file",
         default="/DATA_IN/card_transaction.v1.csv",
         type=str,
@@ -405,10 +399,8 @@ def main(arglist):
 
     # save inference serving model
     os.makedirs(os.path.join(args.model_dir, "credit_card_gnn/1"), exist_ok=True)
-    config_file = os.path.join(args.config_path, "serve/config.pbtxt")
-    os.system("cp {} {}".format(config_file, os.path.join(args.model_dir, "credit_card_gnn/")))
     
-    with open(os.path.join(args.config_path, "serve/GNN-serve.yaml"), "r+") as f_config:
+    with open(os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "serve/GNN-serve.yaml"), "r+") as f_config:
         serving_config = yaml.safe_load(f_config)
     serving_config["model"]["vocab_size"] = vocab_size
     serving_config["model"]["hid_size"] = args.num_hidden
@@ -417,9 +409,6 @@ def main(arglist):
         yaml.dump(serving_config, f_config)
     
     os.system("cp {} {}".format(args.org_data_file, os.path.join(args.model_dir, "credit_card_gnn/1")))
-    os.system("cp {} {}".format(os.path.join(args.config_path, "serve/gnn_model.py"), os.path.join(args.model_dir, "credit_card_gnn/1")))
-    os.system("cp {} {}".format(os.path.join(args.config_path, "serve/model.py"), os.path.join(args.model_dir, "credit_card_gnn/1")))
-    os.system("cp {} {}".format(os.path.join(args.config_path, "tabular2graph.yaml"), os.path.join(args.model_dir, "credit_card_gnn/1")))
     os.system("cp {} {}".format(args.model_out, os.path.join(args.model_dir, "credit_card_gnn/1")))
     os.system("cp -r {} {}".format(os.path.join(os.path.dirname(args.model_out), "sym_tabformer_hetero_CSVDatasets"), os.path.join(args.model_dir, "credit_card_gnn/1")))
 
