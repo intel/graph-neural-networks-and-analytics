@@ -1,4 +1,16 @@
 # Graph Neural Networks and Analytics
+
+## This repository has reached its End of Life (EOL)
+
+Thank you for your interest in this project. We regret to inform you that this repository is no longer maintained or actively developed. As a result, we have reached the End of Life (EOL) for this project.
+
+### What does this mean?
+
+- The project is no longer actively maintained.
+- No new features or updates will be added.
+- No bug fixes or patches will be provided.
+- Issues and pull requests are no longer actively monitored.
+
 ## Introduction
 This workflow shows how to run Graph Neural Network (GNN) training on CPUs in single and distributed mode. The workflow reads tabular data, ingests it into graph format, and then uses a GNN to learn embeddings used as rich features in a downstream task.
 
